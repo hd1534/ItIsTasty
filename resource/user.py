@@ -50,10 +50,11 @@ class UserResource(Resource):
 
 @ns.route('/<int:user_idx>')
 class UserIdxResource(Resource):
+    @ns.expect(user_model)
     @ns.doc(responses={200: '성공', 404: '없는 사용자입니다.'},
             description='''사용자 정보를 수정합니다.''')
     def put(self, user_idx):
-        return {}, update_user(user_idx)
+        return {}, update_user(user_idx, request.get_json())
 
     @ns.doc(responses={200: '성공', 404: '없는 사용자입니다.'},
             description='''사용자를 삭제합니다.''')
