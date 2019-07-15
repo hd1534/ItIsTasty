@@ -19,5 +19,6 @@ DB = SQLAlchemy(app)
 migrate = Migrate(app, DB, compare_type=True)
 
 model_load(
-    'test'
+    'test',
+    'user'
 )

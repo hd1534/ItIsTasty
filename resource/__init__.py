@@ -28,5 +28,6 @@ api = Api(
 )
 
 resource_load(
-    'test'
+    'test',
+    'user'
 )
