@@ -22,9 +22,9 @@ if app.debug is False:
 
 api = Api(
     app,
-    title='makeathon API',
+    title='It Is Tasty API',
     version='1.0',
-    description="makeathon"
+    description="Hello New World"
 )
 
 resource_load(
