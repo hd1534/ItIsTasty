@@ -2,7 +2,7 @@ from ItIsTasty.resource import api
 from flask_restplus import Resource, fields, marshal
 from flask import request
 
-from ItisTasty.database.user import(
+from ItIsTasty.database.user import(
     add_user,
     get_user,
     get_all_user,
