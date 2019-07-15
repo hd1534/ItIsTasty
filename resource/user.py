@@ -4,6 +4,7 @@ from flask import request
 
 from ItIsTasty.database.user import(
     add_user,
+    update_user,
     get_user,
     get_all_user,
     delete_user
@@ -49,6 +50,11 @@ class UserResource(Resource):
 
 @ns.route('/<int:user_idx>')
 class UserIdxResource(Resource):
+    @ns.doc(responses={200: '성공', 404: '없는 사용자입니다.'},
+            description='''사용자 정보를 수정합니다.''')
+    def put(self, user_idx):
+        return {}, update_user(user_idx)
+
     @ns.doc(responses={200: '성공', 404: '없는 사용자입니다.'},
             description='''사용자를 삭제합니다.''')
     def delete(self, user_idx):

@@ -23,6 +23,21 @@ def add_user(data):
     db.session.commit()
 
 
+def update_user(idx, data):
+    user = User.query.filter_by(idx=idx)
+
+    if user.first() is None:
+        return 404
+
+    user.update({
+        'name': data['name'],
+        'age': data['age'],
+        'living_place': data['living_place']
+    })
+    db.session.commit()
+    return 200
+
+
 def get_user(idx):
     return User.query.filter_by(idx=idx).first
 
