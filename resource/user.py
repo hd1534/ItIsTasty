@@ -68,7 +68,8 @@ class UserResource(Resource):
     @ns.doc(responses={200: '성공'},
             description='''사용자를 추가합니다.''')
     def post(self):
-        add_user(request.form())
+        print(request.form['name'])
+        add_user(request.form)
         return {}, 200
 
     @ns.marshal_with(user_list_model)
@@ -84,7 +85,7 @@ class UserIdxResource(Resource):
     @ns.doc(responses={200: '성공', 404: '없는 사용자입니다.'},
             description='''사용자 정보를 수정합니다.''')
     def put(self, user_idx):
-        return {}, update_user(user_idx, request.form())
+        return {}, update_user(user_idx, request.form)
 
     @ns.doc(responses={200: '성공', 404: '없는 사용자입니다.'},
             description='''사용자를 삭제합니다.''')
