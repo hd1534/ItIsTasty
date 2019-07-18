@@ -62,7 +62,7 @@ class UserIdxResource(Resource):
         return {}, delete_user(user_idx)
 
 
-@ns.route('/form<int:user_idx>')
+@ns.route('/form/<int:user_idx>')
 class UserIdxResource(Resource):
     @ns.expect(user_model)
     @ns.doc(responses={200: '성공', 404: '없는 사용자입니다.'},
