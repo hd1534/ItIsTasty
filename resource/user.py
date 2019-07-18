@@ -62,6 +62,22 @@ class UserIdxResource(Resource):
         return {}, delete_user(user_idx)
 
 
+@ns.route('/form/')
+class UserResource(Resource):
+    @ns.expect(user_model)
+    @ns.doc(responses={200: '성공'},
+            description='''사용자를 추가합니다.''')
+    def post(self):
+        add_user(request.form())
+        return {}, 200
+
+    @ns.marshal_with(user_list_model)
+    @ns.doc(description='''모든 사용자를 출력합니다.''',
+            responses={200: '성공'})
+    def get(self):
+        return {'users': get_all_user()}
+
+
 @ns.route('/form/<int:user_idx>')
 class UserIdxResource(Resource):
     @ns.expect(user_model)
