@@ -17,7 +17,7 @@ ns = api.namespace('user', description='사용자 정보')
 user_model = ns.model('UserModel', {
     'name': fields.String(required=True),
     'birth_day': fields.Integer(required=True),
-    'rfid': fields.Integer(required=False),
+    'rfid': fields.String(required=False),
     'living_place': fields.String(required=True),
     'user_type': fields.String(required=True)
 })
@@ -26,7 +26,7 @@ full_user_model = ns.model('FullUserModel', {
     'id': fields.Integer(required=True),
     'name': fields.String(required=True),
     'birth_day': fields.Integer(required=True),
-    'rfid': fields.Integer(required=False),
+    'rfid': fields.String(required=False),
     'living_place': fields.String(required=True),
     'user_type': fields.String(required=True)
 })
