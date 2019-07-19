@@ -30,7 +30,7 @@ class PrintResource(Resource):
     @ns.doc(responses={200: '성공'},
             description='''쿠폰을 출력을 요청합니다.''')
     def post(self):
-        return {}, add_request(request.get_json())
+        return {}, add_request(request.get_json()['coupon_id'])
 
     @ns.marshal_with(out_coupon_model)
     @ns.doc(responses={200: '성공', 404: '없음'},
