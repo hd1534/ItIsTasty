@@ -78,7 +78,7 @@ def add_print_count(coupon_id):
 
     if coupon.first() is None:
         return 404
-    print_count = coupon.print_count
+    print_count = coupon.first().print_count
     coupon.update({
         'print_count': print_count + 1
     })
