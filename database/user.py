@@ -34,8 +34,8 @@ def add_user(data):
     db.session.commit()
 
 
-def update_user(idx, data):
-    user = User.query.filter_by(idx=idx)
+def update_user(id, data):
+    user = User.query.filter_by(id=id)
 
     if user.first() is None:
         return 404
@@ -52,16 +52,16 @@ def update_user(idx, data):
     return 200
 
 
-def get_user(idx):
-    return User.query.filter_by(idx=idx).first
+def get_user(id):
+    return User.query.filter_by(id=id).first
 
 
 def get_all_user():
     return User.query.all()
 
 
-def delete_user(idx):
-    user = User.query.filter_by(idx=idx).first()
+def delete_user(id):
+    user = User.query.filter_by(id=id).first()
     if user is None:
         return 404
     db.session.delete(user)
