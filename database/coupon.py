@@ -2,6 +2,7 @@ from . import DB as db
 from enum import Enum
 
 from datetime import datetime, timedelta
+import random
 
 from ItIsTasty.database.mission import get_mission
 
@@ -12,7 +13,7 @@ class Coupon(db.Model):
                    primary_key=True,
                    nullable=False,
                    autoincrement=True)
-    bar_code = db.Column(db.Integer, nullable=False, autoincrement=True, unique=True)
+    bar_code = db.Column(db.Integer, nullable=True, unique=True)
 
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     mission_id = db.Column(db.Integer, db.ForeignKey('mission.id'), nullable=False)
@@ -29,8 +30,8 @@ class Coupon(db.Model):
 
 def add_coupon(data):
     mission = get_mission(data['mission_id'])
-    # if log.get ~~~ TODO
-    # return 409
+    if get_coupon_by_user_mission_id(data['user_id'], data['mission_id']) is not None:
+        return 409
     db.session.add(Coupon(
         user_id=data['user_id'],
         mission_id=data['mission_id'],
@@ -38,6 +39,11 @@ def add_coupon(data):
         end_time=datetime.today() + timedelta(days=30),
         reward=mission.reward
     ))
+    db.session.commit()
+    coupon = Coupon.query.filter_by(user_id=data['user_id'], mission_id=data['mission_id'])
+    coupon.update({
+        'bar_code': coupon.id * 100000 + random.randrange(100, 100000)
+    })
     db.session.commit()
     return 200
 
