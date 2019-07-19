@@ -112,6 +112,7 @@ class MissionStartResource(Resource):
             description='''미션을 시작 합니다.''')
     def post(self):
         add_log(request.get_json())
+        return {}, 200
 
 
 @ns.route('/finish')
@@ -120,7 +121,7 @@ class MissionFinishResource(Resource):
     @ns.doc(responses={200: '성공', 404: '없는 미션입니다.'},
             description='''미션을 완료 합니다.''')
     def post(self):
-        finish_log(request.get_json())
+        return {}, finish_log(request.get_json())
 
 
 @ns.route('/user/<int:user_id>')
