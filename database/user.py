@@ -45,7 +45,6 @@ def update_user(id, data):
         'birth_day': data['birth_day'],
         'rfid': data['rfid'],
         'user_type': data['user_type'],
-        'joined_date': data['joined_date'],
         'living_place': data['living_place']
     })
     db.session.commit()
