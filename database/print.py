@@ -1,5 +1,10 @@
 from . import DB as db
 
+from ItIsTasty.database.coupon import (
+    get_coupon,
+    add_print_count
+)
+
 
 class Print(db.Model):
     __tablename__ = 'print'
@@ -7,12 +12,20 @@ class Print(db.Model):
                    primary_key=True,
                    nullable=False,
                    autoincrement=True)
-
-    #coupon_id = db.Column(db.Integer, db.ForeignKey('coupon.id'), nullable=False)
-    coupon_id = db.Column(db.Integer, nullable=False)
-    printed = db.Column(db.Boolean, default=False)
-    # coupon = db.relationship("Coupon", back_populates="print")
+    coupon_id = db.Column(db.Integer, db.ForeignKey('coupon.id'), nullable=False)
+    coupon = db.relationship("Coupon", back_populates="print")
 
 
-def get_requests():
-    return Print.query.filter_by(printed=False).all()
+def add_request(coupon_id):
+    db.session.add(Print(coupon_id=coupon_id))
+    db.session.commit()
+    return 200
+
+
+def get_request():
+    request = Print.query.first()
+    if request is None:
+        return 404
+    coupon_id = request.coupon_id
+    add_print_count(coupon_id)
+    return get_coupon(coupon_id)

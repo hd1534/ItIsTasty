@@ -25,7 +25,7 @@ class Coupon(db.Model):
 
     user = db.relationship("User", back_populates="coupon")
     mission = db.relationship("Mission", back_populates="coupon")
-    # print = db.relationship("Print", back_populates="coupon")
+    print = db.relationship("Print", back_populates="coupon")
 
 
 def add_coupon(data):
