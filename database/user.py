@@ -53,7 +53,7 @@ def update_user(id, data):
 
 
 def get_user(id):
-    return User.query.filter_by(id=id).first
+    return User.query.filter_by(id=id).first()
 
 
 def get_all_user():

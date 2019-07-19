@@ -23,7 +23,7 @@ mission_model = ns.model('MissionModel', {
 })
 
 full_mission_model = ns.model('FullMissionModel', {
-    'idx': fields.Integer(required=True),
+    'id': fields.Integer(required=True),
     'title': fields.String(required=True),
     'description': fields.String(required=True),
     'start_time': fields.DateTime(required=True),
@@ -32,7 +32,7 @@ full_mission_model = ns.model('FullMissionModel', {
 })
 
 mission_list_model = ns.model('MissionListModel', {
-    'users': fields.List(fields.Nested(full_mission_model))
+    'missions': fields.List(fields.Nested(full_mission_model))
 })
 
 
@@ -49,18 +49,18 @@ class MissionResource(Resource):
     @ns.doc(description='''모든 미션을 출력합니다.''',
             responses={200: '성공'})
     def get(self):
-        return {'users': get_all_mission()}
+        return {'missions': get_all_mission()}
 
 
-@ns.route('/<int:mission_idx>')
-class MissionIdxResource(Resource):
+@ns.route('/<int:mission_id>')
+class MissionIdResource(Resource):
     @ns.expect(mission_model)
     @ns.doc(responses={200: '성공', 404: '없는 미션입니다.'},
             description='''미션 정보를 수정합니다.''')
-    def put(self, mission_idx):
-        return {}, update_mission(mission_idx, request.get_json())
+    def put(self, mission_id):
+        return {}, update_mission(mission_id, request.get_json())
 
     @ns.doc(responses={200: '성공', 404: '없는 미션입니다.'},
             description='''미션을 삭제합니다.''')
-    def delete(self, mission_idx):
-        return {}, delete_mission(mission_idx)
+    def delete(self, mission_id):
+        return {}, delete_mission(mission_id)

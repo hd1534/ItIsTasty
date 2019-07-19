@@ -49,7 +49,7 @@ def update_mission(id, data):
 
 
 def get_mission(id):
-    return Mission.query.filter_by(id=id).first
+    return Mission.query.filter_by(id=id).first()
 
 
 def get_all_mission():

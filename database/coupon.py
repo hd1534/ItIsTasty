@@ -1,7 +1,9 @@
 from . import DB as db
 from enum import Enum
 
-from datetime import datetime
+from datetime import datetime, timedelta
+
+from ItIsTasty.database.mission import get_mission
 
 
 class Coupon(db.Model):
@@ -10,6 +12,7 @@ class Coupon(db.Model):
                    primary_key=True,
                    nullable=False,
                    autoincrement=True)
+    bar_code = db.Column(db.Integer, nullable=True, autoincrement=True, unique=True)
 
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     mission_id = db.Column(db.Integer, db.ForeignKey('mission.id'), nullable=False)
@@ -17,7 +20,6 @@ class Coupon(db.Model):
     end_time = db.Column(db.DateTime, nullable=True)
 
     reward = db.Column(db.Integer, nullable=True)
-    bar_code = db.Column(db.Integer, nullable=True)
     print_count = db.Column(db.Integer, default=0)
 
     user = db.relationship("User", back_populates="coupon")
@@ -26,39 +28,34 @@ class Coupon(db.Model):
 
 
 def add_coupon(data):
+    mission = get_mission(data['mission_id'])
+    # if log.get ~~~ TODO
+    # return 409
     db.session.add(Coupon(
-        title=data['title'],
-        description=data['description'],
-        start_time=data['start_time'],
-        end_time=data['end_time'],
-        reward=data['reward']
+        user_id=data['user_id'],
+        mission_id=data['mission_id'],
+        start_time=datetime.today(),
+        end_time=datetime.today() + timedelta(days=30),
+        reward=mission.reward
     ))
-    db.session.commit()
-
-
-def update_coupon(id, data):
-    coupon = Coupon.query.filter_by(id=id)
-
-    if coupon.first() is None:
-        return 404
-
-    coupon.update({
-        'title': data['title'],
-        'description': data['description'],
-        'start_time': data['start_time'],
-        'end_time': data['end_time'],
-        'reward': data['reward']
-    })
     db.session.commit()
     return 200
 
 
 def get_coupon(id):
-    return Coupon.query.filter_by(id=id).first
+    return Coupon.query.filter_by(id=id).first()
+
+
+def get_coupon_by_user_mission_id(user_id, mission_id):
+    return Coupon.query.filter_by(user_id=user_id, mission_id=mission_id).first()
 
 
 def get_all_coupon():
     return Coupon.query.all()
+
+
+def get_all_coupon_by_user(user_id):
+    return Coupon.query.filter_by(user_id=user_id).all()
 
 
 def delete_coupon(id):
@@ -70,3 +67,14 @@ def delete_coupon(id):
     return 200
 
 
+def add_print_count(coupon_id):
+    coupon = Coupon.query.filter_by(id=id)
+
+    if coupon.first() is None:
+        return 404
+    print_count = coupon.print_count
+    coupon.update({
+        'print_count': print_count + 1
+    })
+    db.session.commit()
+    return 200

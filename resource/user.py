@@ -53,18 +53,18 @@ class UserResource(Resource):
         return {'users': get_all_user()}
 
 
-@ns.route('/<int:user_idx>')
-class UserIdxResource(Resource):
+@ns.route('/<int:user_id>')
+class UserIdResource(Resource):
     @ns.expect(user_model)
     @ns.doc(responses={200: '성공', 404: '없는 사용자입니다.'},
             description='''사용자 정보를 수정합니다.''')
-    def put(self, user_idx):
-        return {}, update_user(user_idx, request.get_json())
+    def put(self, user_id):
+        return {}, update_user(user_id, request.get_json())
 
     @ns.doc(responses={200: '성공', 404: '없는 사용자입니다.'},
             description='''사용자를 삭제합니다.''')
-    def delete(self, user_idx):
-        return {}, delete_user(user_idx)
+    def delete(self, user_id):
+        return {}, delete_user(user_id)
 
 
 @ns.route('/form/')
@@ -83,15 +83,15 @@ class UserResource(Resource):
         return {'users': get_all_user()}
 
 
-@ns.route('/form/<int:user_idx>')
-class UserIdxResource(Resource):
+@ns.route('/form/<int:user_id>')
+class UseridResource(Resource):
     @ns.expect(user_model)
     @ns.doc(responses={200: '성공', 404: '없는 사용자입니다.'},
             description='''사용자 정보를 수정합니다.''')
-    def put(self, user_idx):
-        return {}, update_user(user_idx, request.form)
+    def put(self, user_id):
+        return {}, update_user(user_id, request.form)
 
     @ns.doc(responses={200: '성공', 404: '없는 사용자입니다.'},
             description='''사용자를 삭제합니다.''')
-    def delete(self, user_idx):
-        return {}, delete_user(user_idx)
+    def delete(self, user_id):
+        return {}, delete_user(user_id)
