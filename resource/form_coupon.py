@@ -12,6 +12,11 @@ from ItIsTasty.database.coupon import(
 
 ns = api.namespace('form/coupon', description='쿠폰 정보(form 사용)')
 
+
+user_id_model = ns.model('UserIdModel', {
+    'user_id': fields.Integer(required=True)
+})
+
 request_coupon_model = ns.model('RequestCouponModel', {
     'user_id': fields.Integer(required=True),
     'mission_id': fields.Integer(required=True),
@@ -63,11 +68,12 @@ class CouponIdResource(Resource):
         return {}, delete_coupon(coupon_id)
 
 
-@ns.route('/user/<int:user_id>')
+@ns.route('/user')
 class CouponUserResource(Resource):
+    @ns.expect(user_id_model)
     @ns.marshal_with(coupon_list_model)
     @ns.doc(description='''해당 유저의 모든 쿠폰을 출력합니다.''',
             responses={200: '성공'})
-    def get(self, user_id):
-        return {'coupons': get_all_coupon_by_user(user_id)}
+    def post(self):
+        return {'coupons': get_all_coupon_by_user(request.form['user_id'])}, 200
 
