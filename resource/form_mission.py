@@ -11,9 +11,22 @@ from ItIsTasty.database.mission import(
     delete_mission
 )
 
+from ItIsTasty.database.log import(
+    add_log,
+    finish_log
+)
+
 
 ns = api.namespace('form/mission', description='미션 정보(form 사용)')
 
+
+simple_log_model = ns.model('SimpleLogModel', {
+    'log_id': fields.Integer(required=True)
+})
+log_mission_model = ns.model('LogMissionModel', {
+    'user_id': fields.Integer(required=True),
+    'mission_id': fields.Integer(required=True)
+})
 
 mission_model = ns.model('MissionModel', {
     'title': fields.String(required=True),
@@ -90,6 +103,25 @@ class MissionIdResource(Resource):
             description='''미션을 삭제합니다.''')
     def delete(self, mission_id):
         return {}, delete_mission(mission_id)
+
+
+@ns.route('/start')
+class MissionStartResource(Resource):
+    @ns.expect(log_mission_model)
+    @ns.doc(responses={200: '성공', 404: '없는 미션입니다.'},
+            description='''미션을 시작 합니다.''')
+    def post(self):
+        add_log(request.form)
+        return {}, 200
+
+
+@ns.route('/finish')
+class MissionFinishResource(Resource):
+    @ns.expect(simple_log_model)
+    @ns.doc(responses={200: '성공', 404: '없는 기록입니다.'},
+            description='''미션을 완료 합니다.''')
+    def post(self):
+        return {}, finish_log(request.form['log_id'])
 
 
 @ns.route('/user/<int:user_id>')
