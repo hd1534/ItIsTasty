@@ -40,7 +40,8 @@ user_list_model = ns.model('UserListModel', {
 class UserResource(Resource):
     @ns.expect(user_model)
     @ns.doc(responses={200: '성공'},
-            description='''사용자를 추가합니다.''')
+            description='''사용자를 추가합니다.
+            user_type은 꼭 A(어드민) 또는 N(노숙자)로 넣어주세요''')
     def post(self):
         add_user(request.get_json())
         return {}, 200
