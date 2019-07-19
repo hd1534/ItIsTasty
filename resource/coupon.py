@@ -48,7 +48,6 @@ coupon_list_model = ns.model('CouponListModel', {
 @ns.route('/')
 class CouponResource(Resource):
     @ns.expect(request_coupon_model)
-    @ns.marshal_with(out_coupon_model)
     @ns.doc(responses={200: '성공', 409: '미션 성공 x'},
             description='''쿠폰을 발급 받습니다.
                            출력은  프린트 api를 이용해주세요''')

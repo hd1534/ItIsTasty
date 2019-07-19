@@ -12,7 +12,7 @@ class Coupon(db.Model):
                    primary_key=True,
                    nullable=False,
                    autoincrement=True)
-    bar_code = db.Column(db.Integer, nullable=True, autoincrement=True, unique=True)
+    bar_code = db.Column(db.Integer, nullable=False, autoincrement=True, unique=True)
 
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     mission_id = db.Column(db.Integer, db.ForeignKey('mission.id'), nullable=False)
