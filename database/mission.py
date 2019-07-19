@@ -16,7 +16,7 @@ class Mission(db.Model):
     end_time = db.Column(db.DateTime, nullable=True)
     reward = db.Column(db.Integer, nullable=True)
 
-    #coupon = db.relationship("Coupon", back_populates="mission")
+    coupon = db.relationship("Coupon", back_populates="mission")
     #log = db.relationship("Log", back_populates="mission")
 
 
