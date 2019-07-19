@@ -105,7 +105,7 @@ class MissionIdResource(Resource):
         return {}, delete_mission(mission_id)
 
 
-@ns.route('/mission/start')
+@ns.route('/start')
 class MissionStartResource(Resource):
     @ns.expect(log_mission_model)
     @ns.doc(responses={200: '성공', 404: '없는 미션입니다.'},
@@ -114,14 +114,13 @@ class MissionStartResource(Resource):
         add_log(request.get_json())
 
 
-@ns.route('/mission/finish')
+@ns.route('/finish')
 class MissionFinishResource(Resource):
     @ns.expect(log_model)
     @ns.doc(responses={200: '성공', 404: '없는 미션입니다.'},
             description='''미션을 완료 합니다.''')
     def post(self):
-        add_log(request.get_json())
-
+        finish_log(request.get_json())
 
 
 @ns.route('/user/<int:user_id>')
