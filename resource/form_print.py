@@ -8,7 +8,7 @@ from ItIsTasty.database.print import(
 )
 
 
-ns = api.namespace('print', description='프린트 요청 정보')
+ns = api.namespace('form/print', description='프린트 요청 정보(form 사용)')
 
 out_coupon_model = ns.model('CouponModel', {
     'user_name': fields.String(required=True, attribute='user.name'),
