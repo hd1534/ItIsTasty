@@ -20,6 +20,10 @@ from ItIsTasty.database.log import(
 ns = api.namespace('form/mission', description='미션 정보(form 사용)')
 
 
+user_id_model = ns.model('UserIdModel', {
+    'user_id': fields.Integer(required=True)
+})
+
 simple_log_model = ns.model('SimpleLogModel', {
     'log_id': fields.Integer(required=True)
 })
@@ -124,10 +128,11 @@ class MissionFinishResource(Resource):
         return {}, finish_log(request.form['log_id'])
 
 
-@ns.route('/user/<int:user_id>')
+@ns.route('/user')
 class MissionUserResource(Resource):
+    @ns.expect(user_id_model)
     @ns.marshal_with(mission_log_list_model)
     @ns.doc(description='''모든 미션을 출력합니다.''',
             responses={200: '성공'})
-    def get(self, user_id):
-        return {'missions': get_all_mission_and_log_by_user_id(user_id)}, 200
+    def post(self):
+        return {'missions': get_all_mission_and_log_by_user_id(request.form['user_id'])}, 200
