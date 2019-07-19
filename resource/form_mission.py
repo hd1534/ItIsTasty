@@ -12,7 +12,7 @@ from ItIsTasty.database.mission import(
 )
 
 
-ns = api.namespace('mission', description='미션 정보')
+ns = api.namespace('form/mission', description='미션 정보(form 사용)')
 
 
 mission_model = ns.model('MissionModel', {
