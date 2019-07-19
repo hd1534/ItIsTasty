@@ -17,5 +17,6 @@ class Mission(db.Model):
     reward = db.Column(db.Integer, nullable=True)
 
     coupon = db.relationship("Coupon", back_populates="mission")
+    log = db.relationship("Log", back_populates="mission")
 
 
