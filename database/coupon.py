@@ -42,7 +42,7 @@ def add_coupon(data):
     db.session.commit()
     coupon = Coupon.query.filter_by(user_id=data['user_id'], mission_id=data['mission_id'])
     coupon.update({
-        'bar_code': coupon.id * 100000 + random.randrange(100, 100000)
+        'bar_code': coupon.first().id * 100000 + random.randrange(100, 100000)
     })
     db.session.commit()
     return 200
