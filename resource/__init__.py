@@ -30,5 +30,5 @@ api = Api(
 resource_load(
     'test',
     'user', 'mission', 'coupon', 'print',
-    'form_user'
+    'form_user', 'form_coupon', 'form_mission'
 )
