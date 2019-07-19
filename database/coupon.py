@@ -20,4 +20,6 @@ class Coupon(db.Model):
     bar_code = db.Column(db.Integer, nullable=True)
     print_count = db.Column(db.Integer, default=0)
 
-
+    user = db.relationship("User", back_populates="coupon")
+    mission = db.relationship("Mission", back_populates="coupon")
+    print = db.relationship("Print", back_populates="coupon")
