@@ -22,7 +22,7 @@ mission_model = ns.model('MissionModel', {
     'reward': fields.Integer(required=False)
 })
 
-full_mission_model = ns.model('MissionListModel', {
+full_mission_model = ns.model('FullMissionModel', {
     'idx': fields.Integer(required=True),
     'title': fields.String(required=True),
     'description': fields.String(required=True),
