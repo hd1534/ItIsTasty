@@ -121,7 +121,7 @@ class MissionFinishResource(Resource):
     @ns.doc(responses={200: '성공', 404: '없는 미션입니다.'},
             description='''미션을 완료 합니다.''')
     def post(self):
-        return {}, finish_log(request.get_json())
+        return {}, finish_log(request.get_json()['log_id'])
 
 
 @ns.route('/user/<int:user_id>')
