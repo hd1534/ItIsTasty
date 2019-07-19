@@ -67,7 +67,7 @@ full_mission_log_model = ns.model('FullMissionLogModel', {
     'reward': fields.String(required=False),
     'my_start_time': fields.DateTime(attribute='log.start_time', required=True),
     'my_end_time': fields.DateTime(attribute='log.end_time', required=True),
-    'success': fields.Boolean(required=True)
+    'success': fields.Boolean(attribute='log.success', required=True)
 })
 
 mission_list_model = ns.model('MissionListModel', {
