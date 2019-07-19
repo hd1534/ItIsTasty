@@ -1,18 +1,24 @@
 from . import DB as db
+from enum import Enum
+
+from datetime import datetime
 
 
 class User(db.Model):
     __tablename__ = 'user'
-    idx = db.Column(db.Integer,
-                    primary_key=True,
-                    nullable=False,
-                    autoincrement=True)
+    id = db.Column(db.Integer,
+                   primary_key=True,
+                   nullable=False,
+                   autoincrement=True)
+    rfid = db.Column(db.String(10), nullable=True)
+    user_type = db.Column(db.Enum('A', 'N'), nullable=False)
     name = db.Column(db.String(100), nullable=False)
-    age = db.Column(db.Integer, nullable=False)
-    living_place = db.Column(db.String(100), nullable=False)
+    joined_date = db.Column(db.DateTime, nullable=True)
+    living_place = db.Column(db.String(100), nullable=True)
+    image_hashed = db.Column(db.Text(), nullable=True)
+    image_origin = db.Column(db.Text(), nullable=True)
 
-    # serial = db.Column(db.Integer, nullable=False)
-
+    log = db.relationship("Log", back_populates="user")
 
 def add_user(data):
     db.session.add(User(

@@ -1,6 +1,6 @@
 from ItIsTasty.resource import api
 from flask_restplus import Resource, fields, marshal
-from flask import request
+from flask import request, send_file
 
 from ItIsTasty.database.user import(
     add_user,
@@ -68,7 +68,6 @@ class UserResource(Resource):
     @ns.doc(responses={200: '성공'},
             description='''사용자를 추가합니다.''')
     def post(self):
-        print(request.form['name'])
         add_user(request.form)
         return {}, 200
 
