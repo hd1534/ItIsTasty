@@ -75,4 +75,4 @@ class UserResource(Resource):
     @ns.doc(description='''해당 rfid의 사용자를 출력합니다.''',
             responses={200: '성공'})
     def get(self, rfid):
-        return {'users': get_user_by_rfid(rfid)}
+        return get_user_by_rfid(rfid), 200
