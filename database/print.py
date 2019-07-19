@@ -27,6 +27,8 @@ def get_request():
     if request is None:
         return 404
     coupon_id = request.coupon_id
+    coupon = get_coupon(coupon_id)
     add_print_count(coupon_id)
     db.session.delete(request)
-    return get_coupon(coupon_id)
+    db.session.commit()
+    return coupon

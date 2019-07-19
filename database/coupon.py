@@ -83,4 +83,3 @@ def add_print_count(coupon_id):
         'print_count': print_count + 1
     })
     db.session.commit()
-    return 200
