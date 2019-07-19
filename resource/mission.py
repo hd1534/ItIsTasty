@@ -49,7 +49,7 @@ full_log_model = ns.model('FullLogModel', {
     'success': fields.Boolean(required=True)
 })
 
-log_model = ns.model('LogModel', {
+simple_log_model = ns.model('SimpleLogModel', {
     'log_id': fields.Integer(required=True)
 })
 
@@ -117,7 +117,7 @@ class MissionStartResource(Resource):
 
 @ns.route('/finish')
 class MissionFinishResource(Resource):
-    @ns.expect(log_model)
+    @ns.expect(simple_log_model)
     @ns.doc(responses={200: '성공', 404: '없는 기록입니다.'},
             description='''미션을 완료 합니다.''')
     def post(self):
