@@ -36,7 +36,7 @@ def finish_log(log_id):
         return 404
 
     log.update({
-        'end_date': datetime.today(),
+        'end_time': datetime.today(),
         'success': True
     })
     db.session.commit()
