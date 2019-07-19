@@ -74,7 +74,7 @@ def delete_coupon(id):
 
 
 def add_print_count(coupon_id):
-    coupon = Coupon.query.filter_by(id=id)
+    coupon = Coupon.query.filter_by(id=coupon_id)
 
     if coupon.first() is None:
         return 404
