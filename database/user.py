@@ -13,6 +13,7 @@ class User(db.Model):
     rfid = db.Column(db.String(10), nullable=True)
     user_type = db.Column(db.Enum('A', 'N'), nullable=False)
     name = db.Column(db.String(100), nullable=False)
+    birth_day = db.Column(db.Integer, nullable=False)
     joined_date = db.Column(db.DateTime, nullable=True)
     living_place = db.Column(db.String(100), nullable=True)
     image_hashed = db.Column(db.Text(), nullable=True)
@@ -24,7 +25,10 @@ class User(db.Model):
 def add_user(data):
     db.session.add(User(
         name=data['name'],
-        age=data['age'],
+        birth_day=data['birth_day'],
+        rfid=data['rfid'],
+        user_type=data['user_type'],
+        joined_date=datetime.today(),
         living_place=data['living_place']
     ))
     db.session.commit()
@@ -38,7 +42,10 @@ def update_user(idx, data):
 
     user.update({
         'name': data['name'],
-        'age': data['age'],
+        'birth_day': data['birth_day'],
+        'rfid': data['rfid'],
+        'user_type': data['user_type'],
+        'joined_date': data['joined_date'],
         'living_place': data['living_place']
     })
     db.session.commit()
