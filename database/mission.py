@@ -63,7 +63,6 @@ def get_all_mission_and_log_by_user_id(user_id):
     for mission in missions:
         mission_dict = mission.__dict__
         mission_dict['log'] = get_log_user_mission_id(user_id, mission.id)
-        print(mission)
     return missions
 
 
