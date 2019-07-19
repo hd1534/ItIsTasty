@@ -37,7 +37,7 @@ mission_list_model = ns.model('MissionListModel', {
 
 
 @ns.route('/')
-class UserResource(Resource):
+class MissionResource(Resource):
     @ns.expect(mission_model)
     @ns.doc(responses={200: '성공'},
             description='''미션을 추가합니다.''')
@@ -53,7 +53,7 @@ class UserResource(Resource):
 
 
 @ns.route('/<int:mission_idx>')
-class UserIdxResource(Resource):
+class MissionIdxResource(Resource):
     @ns.expect(mission_model)
     @ns.doc(responses={200: '성공', 404: '없는 미션입니다.'},
             description='''미션 정보를 수정합니다.''')
