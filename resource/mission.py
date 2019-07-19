@@ -93,9 +93,9 @@ class MissionIdResource(Resource):
 
 
 @ns.route('/user/<int:user_id>')
-class MissionResource(Resource):
-    @ns.marshal_with(full_mission_log_model)
+class MissionUserResource(Resource):
+    @ns.marshal_with(mission_log_list_model)
     @ns.doc(description='''모든 미션을 출력합니다.''',
             responses={200: '성공'})
     def get(self, user_id):
-        return {'missions': get_all_mission_and_log_by_user_id(user_id)}
+        return {'missions': get_all_mission_and_log_by_user_id(user_id)}, 200

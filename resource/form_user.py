@@ -74,7 +74,7 @@ class UserIdResource(Resource):
 
 
 @ns.route('/rfid/<rfid>')
-class UserResource(Resource):
+class UserRfidResource(Resource):
     @ns.marshal_with(user_model)
     @ns.doc(description='''해당 rfid의 사용자를 출력합니다.''',
             responses={200: '성공'})
@@ -83,7 +83,7 @@ class UserResource(Resource):
 
 
 @ns.route('/rfid')
-class UserResource(Resource):
+class UserRfidResource(Resource):
     @ns.expect(rfid_model)
     @ns.marshal_with(full_user_model)
     @ns.doc(description='''해당 rfid의 사용자를 출력합니다.''',
