@@ -8,7 +8,7 @@ class Print(db.Model):
                    nullable=False,
                    autoincrement=True)
 
-    coupon_id = db.Column(db.Integer, db.ForeignKey('coupon.id'), nullable=False)
+    #coupon_id = db.Column(db.Integer, db.ForeignKey('coupon.id'), nullable=False)
     printed = db.Column(db.Boolean, default=False)
     coupon = db.relationship("Coupon", back_populates="print")
 

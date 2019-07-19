@@ -18,8 +18,8 @@ class User(db.Model):
     image_hashed = db.Column(db.Text(), nullable=True)
     image_origin = db.Column(db.Text(), nullable=True)
 
-    log = db.relationship("Log", back_populates="user")
-    coupon = db.relationship("Coupon", back_populates="user")
+    #log = db.relationship("Log", back_populates="user")
+    #coupon = db.relationship("Coupon", back_populates="user")
 
 def add_user(data):
     db.session.add(User(
