@@ -20,7 +20,7 @@ request_coupon_model = ns.model('RequestCouponModel', {
 out_coupon_model = ns.model('CouponModel', {
     'user_name': fields.String(required=True, attribute='user.name'),
     'mission_title': fields.String(required=True, attribute='mission.title'),
-    'reward': fields.Integer(required=True),
+    'reward': fields.String(required=True),
     'bar_code':fields.Integer(required=True),
     'print_count':fields.Integer(required=True),
     "start_time": fields.DateTime(),
@@ -33,7 +33,7 @@ full_coupon_model = ns.model('FullCouonModel', {
     'mission_id': fields.Integer(required=True),
     'user_name': fields.String(required=True, attribute='user.name'),
     'mission_title': fields.String(required=True, attribute='mission.title'),
-    'reward': fields.Integer(required=True),
+    'reward': fields.String(required=True),
     'bar_code':fields.Integer(required=True),
     'print_count':fields.Integer(required=True),
     "start_time": fields.DateTime(),

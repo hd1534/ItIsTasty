@@ -19,7 +19,7 @@ mission_model = ns.model('MissionModel', {
     'description': fields.String(required=True),
     'start_time': fields.DateTime(required=True),
     'end_time': fields.DateTime(required=True),
-    'reward': fields.Integer(required=False)
+    'reward': fields.String(required=False)
 })
 
 full_mission_model = ns.model('FullMissionModel', {
@@ -28,7 +28,7 @@ full_mission_model = ns.model('FullMissionModel', {
     'description': fields.String(required=True),
     'start_time': fields.DateTime(required=True),
     'end_time': fields.DateTime(required=True),
-    'reward': fields.Integer(required=False)
+    'reward': fields.String(required=False)
 })
 
 mission_list_model = ns.model('MissionListModel', {

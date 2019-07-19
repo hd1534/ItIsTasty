@@ -22,6 +22,7 @@ class User(db.Model):
     #log = db.relationship("Log", back_populates="user")
     coupon = db.relationship("Coupon", back_populates="user")
 
+
 def add_user(data):
     db.session.add(User(
         name=data['name'],
@@ -53,6 +54,10 @@ def update_user(id, data):
 
 def get_user(id):
     return User.query.filter_by(id=id).first()
+
+
+def get_user_by_rfid(rfid):
+    return User.query.filter_by(rfid=rfid).first()
 
 
 def get_all_user():

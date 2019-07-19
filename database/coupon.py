@@ -20,7 +20,7 @@ class Coupon(db.Model):
     start_time = db.Column(db.DateTime, nullable=False)
     end_time = db.Column(db.DateTime, nullable=True)
 
-    reward = db.Column(db.Integer, nullable=True)
+    reward = db.Column(db.String(100), nullable=True)
     print_count = db.Column(db.Integer, default=0)
 
     user = db.relationship("User", back_populates="coupon")

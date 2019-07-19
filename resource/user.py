@@ -6,6 +6,7 @@ from ItIsTasty.database.user import(
     add_user,
     update_user,
     get_user,
+    get_user_by_rfid,
     get_all_user,
     delete_user
 )
@@ -68,31 +69,10 @@ class UserIdResource(Resource):
         return {}, delete_user(user_id)
 
 
-@ns.route('/form/')
+@ns.route('/rfid/<rfid>')
 class UserResource(Resource):
-    @ns.expect(user_model)
-    @ns.doc(responses={200: '성공'},
-            description='''사용자를 추가합니다.''')
-    def post(self):
-        add_user(request.form)
-        return {}, 200
-
-    @ns.marshal_with(user_list_model)
-    @ns.doc(description='''모든 사용자를 출력합니다.''',
+    @ns.marshal_with(user_model)
+    @ns.doc(description='''해당 rfid의 사용자를 출력합니다.''',
             responses={200: '성공'})
-    def get(self):
-        return {'users': get_all_user()}
-
-
-@ns.route('/form/<int:user_id>')
-class UseridResource(Resource):
-    @ns.expect(user_model)
-    @ns.doc(responses={200: '성공', 404: '없는 사용자입니다.'},
-            description='''사용자 정보를 수정합니다.''')
-    def put(self, user_id):
-        return {}, update_user(user_id, request.form)
-
-    @ns.doc(responses={200: '성공', 404: '없는 사용자입니다.'},
-            description='''사용자를 삭제합니다.''')
-    def delete(self, user_id):
-        return {}, delete_user(user_id)
+    def get(self, rfid):
+        return {'users': get_user_by_rfid(rfid)}
