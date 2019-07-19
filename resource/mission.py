@@ -36,10 +36,6 @@ full_mission_model = ns.model('FullMissionModel', {
     'reward': fields.String(required=False)
 })
 
-log_model = ns.model('LogModel', {
-    'log_id': fields.Integer(required=True)
-})
-
 log_mission_model = ns.model('LogMissionModel', {
     'user_id': fields.Integer(required=True),
     'mission_id': fields.Integer(required=True)
@@ -51,6 +47,10 @@ full_log_model = ns.model('FullLogModel', {
     'start_time': fields.DateTime(required=True),
     'end_time': fields.DateTime(required=True),
     'success': fields.Boolean(required=True)
+})
+
+log_model = ns.model('LogModel', {
+    'log_id': fields.Integer(required=True)
 })
 
 full_mission_log_model = ns.model('FullMissionLogModel', {
@@ -118,7 +118,7 @@ class MissionStartResource(Resource):
 @ns.route('/finish')
 class MissionFinishResource(Resource):
     @ns.expect(log_model)
-    @ns.doc(responses={200: '성공', 404: '없는 미션입니다.'},
+    @ns.doc(responses={200: '성공', 404: '없는 기록입니다.'},
             description='''미션을 완료 합니다.''')
     def post(self):
         return {}, finish_log(request.get_json()['log_id'])
