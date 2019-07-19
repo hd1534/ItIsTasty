@@ -36,4 +36,7 @@ class PrintResource(Resource):
     @ns.doc(responses={200: '성공', 404: '없음'},
             description='''프린트 요청을 받습니다.''')
     def get(self):
-        return {}, get_request()
+        request = get_request()
+        if request == 404:
+            return {}, 404
+        return request, 200
