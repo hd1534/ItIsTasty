@@ -20,5 +20,5 @@ migrate = Migrate(app, DB, compare_type=True)
 
 model_load(
     'test',
-    'user'
+    'user', 'coupon', 'image', 'log', 'mission', 'print'
 )
