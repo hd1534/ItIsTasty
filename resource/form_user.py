@@ -36,6 +36,10 @@ user_list_model = ns.model('UserListModel', {
     'users': fields.List(fields.Nested(full_user_model))
 })
 
+rfid_model = ns.model('RfidModel', {
+    'rfid': fields.String(required=True)
+})
+
 
 @ns.route('/')
 class UserResource(Resource):
@@ -76,3 +80,13 @@ class UserResource(Resource):
             responses={200: '성공'})
     def get(self, rfid):
         return get_user_by_rfid(rfid), 200
+
+
+@ns.route('/rfid')
+class UserResource(Resource):
+    @ns.expect(rfid_model)
+    @ns.marshal_with(user_model)
+    @ns.doc(description='''해당 rfid의 사용자를 출력합니다.''',
+            responses={200: '성공'})
+    def post(self):
+        return get_user_by_rfid(request.form['rfid']), 200
