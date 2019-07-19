@@ -11,7 +11,7 @@ class Print(db.Model):
     #coupon_id = db.Column(db.Integer, db.ForeignKey('coupon.id'), nullable=False)
     coupon_id = db.Column(db.Integer, nullable=False)
     printed = db.Column(db.Boolean, default=False)
-    coupon = db.relationship("Coupon", back_populates="print")
+    # coupon = db.relationship("Coupon", back_populates="print")
 
 
 def get_requests():
