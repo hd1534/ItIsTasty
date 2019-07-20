@@ -14,7 +14,7 @@ class Log(db.Model):
     mission_id = db.Column(db.Integer, db.ForeignKey('mission.id'), nullable=False)
     start_time = db.Column(db.DateTime, nullable=False)
     end_time = db.Column(db.DateTime, nullable=True)
-    success = db.Column(db.Boolean, default=False)
+    success = db.Column(db.Integer, nullable=True)
 
     user = db.relationship("User", back_populates="log")
     mission = db.relationship("Mission", back_populates="log")
@@ -24,7 +24,8 @@ def add_log(data):
     db.session.add(Log(
         user_id=data['user_id'],
         mission_id=data['mission_id'],
-        start_time=datetime.today()
+        start_time=datetime.today(),
+        success=1
     ))
     db.session.commit()
 
@@ -37,7 +38,7 @@ def finish_log(log_id):
 
     log.update({
         'end_time': datetime.today(),
-        'success': True
+        'success': 2
     })
     db.session.commit()
     return 200
