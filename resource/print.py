@@ -19,18 +19,19 @@ out_coupon_model = ns.model('CouponModel', {
     "end_time": fields.DateTime()
 })
 
-print_request_model = ns.model('PrintRequestModel', {
-    'coupon_id': fields.Integer(required=True)
+request_coupon_model = ns.model('RequestCouponModel', {
+    'user_id': fields.Integer(required=True),
+    'mission_id': fields.Integer(required=True),
 })
 
 
 @ns.route('/')
 class PrintResource(Resource):
-    @ns.expect(print_request_model)
+    @ns.expect(request_coupon_model)
     @ns.doc(responses={200: '성공'},
             description='''쿠폰을 출력을 요청합니다.''')
     def post(self):
-        return {}, add_request(request.get_json()['coupon_id'])
+        return {}, add_request(request.get_json())
 
     @ns.marshal_with(out_coupon_model)
     @ns.doc(responses={200: '성공', 404: '없음'},

@@ -2,6 +2,7 @@ from . import DB as db
 
 from ItIsTasty.database.coupon import (
     get_coupon,
+    get_coupon_by_user_mission_id,
     add_print_count
 )
 
@@ -16,8 +17,9 @@ class Print(db.Model):
     coupon = db.relationship("Coupon", back_populates="print")
 
 
-def add_request(coupon_id):
-    db.session.add(Print(coupon_id=coupon_id))
+def add_request(data):
+    coupon = get_coupon_by_user_mission_id(data['user_id'], data['mission_id'])
+    db.session.add(Print(coupon_id=coupon.id))
     db.session.commit()
     return 200
 
