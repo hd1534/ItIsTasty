@@ -41,3 +41,11 @@ class PrintResource(Resource):
         if request == 404:
             return {}, 404
         return request, 200
+
+
+@ns.route('/static')
+class PrintStaticResource(Resource):
+    @ns.doc(responses={200: '성공', 404: '없음'},
+            description='''프린트 요청을 받습니다.''')
+    def get(self):
+        return {}, add_request({'user_id': 1, 'mission_id': 1})
