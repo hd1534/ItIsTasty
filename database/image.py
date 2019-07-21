@@ -16,11 +16,11 @@ class Image(db.Model):
 
 '''
 def get_image():
-    snsimages = get_sns_post_image_by_idx(idx)
+    images = get_image_by_id(id)
     imagepath = os.path.join(app.config['UPLOAD_FOLDER'],
-                             snsimages.image_hashed)
+                             images.image_hashed)
 
     return send_file(imagepath,
-                     attachment_filename=snsimages.image_origin,
+                     attachment_filename=images.image_origin,
                      as_attachment=True)
 '''
